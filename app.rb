@@ -12,13 +12,6 @@ helpers do
   end
 end
 
-before '/secure/*' do
-  unless session[:identity]
-    session[:previous_url] = request.path
-    @error = 'Sorry, you need to be logged in to visit ' + request.path
-    halt erb(:login_form)
-  end
-end
 
 get '/' do
    erb 'Can you handle a <a href="/secure/place">secret</a>?'
@@ -39,6 +32,6 @@ get '/logout' do
   erb "<div class='alert alert-message'>Logged out</div>"
 end
 
-get '/secure/place' do
-  erb 'This is a secret place that only <%=session[:identity]%> has access to!'
+get '/about' do
+  erb :about
 end
