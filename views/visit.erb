@@ -1,6 +1,16 @@
 <h2>Записаться</h2>
 
+
 <form action="/visit" method="POST" role="form">
+
+<p>Выберать парикмахера из списка:</p>
+   <p><select name="pregunta" required>
+    <option></option>
+    <option value="1">Walter White</option>
+    <option value="2">Jessie Pinkman</option>
+    <option value="3">Gus Fring</option>
+   </select></p>
+
 
   <div class="form-group">
     <label>Ваше имя</label>
@@ -16,6 +26,8 @@
     <label>Время визита</label>
     <input name="data_time" type="text" class="form-control"  placeholder="Введите время и дату">
   </div>
+
+
 
   <button type="submit" class="btn btn-primary">Записаться</button>
 
