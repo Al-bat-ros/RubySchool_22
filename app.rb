@@ -27,9 +27,26 @@ post '/login/attempt' do
   redirect to where_user_came_from
 end
 
+post '/visit' do
+
+  @username = params[:username]
+  @namber_phone = params[:namber_phone]
+  @data_time = params[:data_time]
+
+  f = File.open './public/user.txt','a'
+  f.write "User:#{@username}, Phone:#{@namber_phone}, Data:#{@data_time}"
+  f.close
+
+  erb :visit
+end
+
+post '/contacts' do
+   erb :contacts
+end
+
 get '/logout' do
   session.delete(:identity)
-  erb "<div class='alert alert-message'>Logged out</div>"
+  erb "<div class='alert alert-message'>Logged,out</div>"
 end
 
 get '/about' do
