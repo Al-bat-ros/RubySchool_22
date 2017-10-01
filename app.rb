@@ -7,7 +7,7 @@ configure do
 end
 
 helpers do
-  def username
+  def usernamese
     session[:identity] ? session[:identity] : 'Hello stranger'
   end
 end
@@ -18,14 +18,18 @@ get '/' do
 end
 
 get '/login/form' do
-  erb :login_form
+  @pass = params[:pass]
+  @mail = params[:mail]
+
+  if @pass == 'admin@mail.ru' && @mail == 'admin'
+     erb :about
+   else
+     erb :login_form
+  end
+
 end
 
-post '/login/attempt' do
-  session[:identity] = params['username']
-  where_user_came_from = session[:previous_url] || '/'
-  redirect to where_user_came_from
-end
+
 
 post '/visit' do
   @list = params[:list]
@@ -44,10 +48,6 @@ post '/contacts' do
    erb :contacts
 end
 
-get '/logout' do
-  session.delete(:identity)
-  erb "<div class='alert alert-message'>Logged,out</div>"
-end
 
 get '/about' do
   erb :about
