@@ -28,13 +28,13 @@ post '/login/attempt' do
 end
 
 post '/visit' do
-
+  @list = params[:list]
   @username = params[:username]
   @namber_phone = params[:namber_phone]
   @data_time = params[:data_time]
 
   f = File.open './public/user.txt','a'
-  f.write "User:#{@username}, Phone:#{@namber_phone}, Data:#{@data_time}"
+  f.write "User:#{@username}, Phone:#{@namber_phone}, Data:#{@data_time}, Hairdresser:#{@list}"
   f.close
 
   erb :visit
