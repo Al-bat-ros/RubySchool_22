@@ -26,14 +26,26 @@ post '/visit' do
   @data_time = params[:data_time]
 
   f = File.open './public/user.txt','a'
-  f.write "User:#{@username}, Phone:#{@namber_phone}, Data:#{@data_time}, Hairdresser:#{@list}<p"
+  f.write "User:#{@username}, Phone:#{@namber_phone}, Data:#{@data_time}, Hairdresser:#{@list}. "
   f.close
 
   erb 'Спасибо!! ждем вас'
 end
 
 post '/contacts' do
-   erb :contacts
+  @Email1 = params[:Email1]
+  @Message = params[:Message]
+
+  if @Email1 == '' 
+     erb 'Поле Email не должно быть пустым'
+  else
+
+     f = File.open './public/contacts.txt','a'
+     f.write "Contacts: #{@Email1}, Message: #{@Message}. "
+     f.close
+
+     erb 'Мы сохранили ваш контакт и сообщение!!! <a href="/contacts">Contacts</a>?'
+  end
 end
 
 
