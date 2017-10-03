@@ -7,7 +7,7 @@ configure do
 end
 
 helpers do
-  def usernamese
+  def username
     session[:identity] ? session[:identity] : 'Hello stranger'
   end
 end
@@ -17,23 +17,11 @@ get '/' do
    erb 'Can you handle a <a href="/secure/place">secret</a>?'
 end
 
-get '/login/form' do
-  @pass = params[:pass]
-  @mail = params[:mail]
-
-  if @pass == 'admin@mail.ru' && @mail == 'admin'
-     erb :about
-   else
-     erb :login_form
-  end
-
-end
-
 
 
 post '/visit' do
   @list = params[:list]
-  @username = params[:username]
+  @username = params[:user_name]
   @namber_phone = params[:namber_phone]
   @data_time = params[:data_time]
 
@@ -41,7 +29,7 @@ post '/visit' do
   f.write "User:#{@username}, Phone:#{@namber_phone}, Data:#{@data_time}, Hairdresser:#{@list}"
   f.close
 
-  erb :visit
+  erb 'Спасибо!! ждем вас'
 end
 
 post '/contacts' do
@@ -61,3 +49,6 @@ get '/contacts' do
   erb :contacts
 end
 
+get '/login/form' do
+  erb :login_form
+end
